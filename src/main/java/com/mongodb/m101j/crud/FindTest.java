@@ -22,17 +22,15 @@ import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
-import javax.print.Doc;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import static com.mongodb.m101j.util.Helpers.printJson;
 
 public class FindTest {
     public static void main(String[] args) {
         MongoClient client = new MongoClient();
-        MongoDatabase database = client.getDatabase("course");
+        MongoDatabase database = client.getDatabase("com/mongodb/m101j/course");
         MongoCollection<Document> collection = database.getCollection("findTest");
 
         collection.drop();

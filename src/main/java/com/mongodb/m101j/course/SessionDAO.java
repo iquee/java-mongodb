@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package course;
+package com.mongodb.m101j.course;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;

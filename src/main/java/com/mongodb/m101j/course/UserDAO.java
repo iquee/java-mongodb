@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package course;
+package com.mongodb.m101j.course;
 
-import com.mongodb.BasicDBObject;
 import com.mongodb.ErrorCategory;
 import com.mongodb.MongoWriteException;
 import com.mongodb.client.MongoCollection;
@@ -45,23 +44,16 @@ public class UserDAO {
 
         String passwordHash = makePasswordHash(password, Integer.toString(random.nextInt()));
 
-        // XXX WORK HERE
-        // create an object suitable for insertion into the user collection
-        // be sure to add username and hashed password to the document. problem instructions
-        // will tell you the schema that the documents must follow.
         Document user = new Document();
-        user.append("_id", username);
-        user.append("password", passwordHash);
+
+        user.append("_id", username).append("password", passwordHash);
 
         if (email != null && !email.equals("")) {
-            // XXX WORK HERE
-            // if there is an email address specified, add it to the document too.
+            // the provided email address
             user.append("email", email);
         }
 
         try {
-            // XXX WORK HERE
-            // insert the document into the user collection here
             usersCollection.insertOne(user);
             return true;
         } catch (MongoWriteException e) {
@@ -74,17 +66,13 @@ public class UserDAO {
     }
 
     public Document validateLogin(String username, String password) {
-        Document user = null;
+        Document user;
 
-        // XXX look in the user collection for a user that has this username
-        // assign the result to the user variable.
         user = usersCollection.find(eq("_id", username)).first();
 
         if (user == null) {
             System.out.println("User not in database");
             return null;
-        } else{
-            System.out.println("YES");
         }
 
         String hashedAndSalted = user.get("password").toString();

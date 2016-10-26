@@ -24,14 +24,12 @@ import org.bson.Document;
 import java.util.ArrayList;
 
 import static com.mongodb.client.model.Filters.eq;
-import static com.mongodb.client.model.Filters.gt;
-import static com.mongodb.client.model.Filters.gte;
 import static com.mongodb.m101j.util.Helpers.printJson;
 
 public class DeleteTest {
     public static void main(String[] args) {
         MongoClient client = new MongoClient();
-        MongoDatabase database = client.getDatabase("course");
+        MongoDatabase database = client.getDatabase("com/mongodb/m101j/course");
         MongoCollection<Document> collection = database.getCollection("test");
 
         collection.drop();
