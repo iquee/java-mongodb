@@ -1,10 +1,18 @@
 package com.mongodb.m101j.course;
 
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.UpdateOptions;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+
+import static com.mongodb.client.model.Filters.eq;
 
 public class BlogPostDAO {
     MongoCollection<Document> postsCollection;
@@ -17,11 +25,11 @@ public class BlogPostDAO {
     public Document findByPermalink(String permalink) {
 
         // XXX HW 3.2,  Work Here
-        Document post = null;
+        Document post = new Document();
+        post.append("permalink", permalink);
 
-
-
-        return post;
+        FindIterable<Document> posts = postsCollection.find(post);
+        return posts.first();
     }
 
     // Return a list of posts in descending order. Limit determines
@@ -30,8 +38,8 @@ public class BlogPostDAO {
 
         // XXX HW 3.2,  Work Here
         // Return a list of DBObjects, each one a post from the posts collection
-        List<Document> posts = null;
-
+        ArrayList<Document> posts = postsCollection.find().sort(new Document("_id", -1))
+                .limit(limit).into(new ArrayList<Document>());
         return posts;
     }
 
@@ -57,7 +65,15 @@ public class BlogPostDAO {
 
         // Build the post object and insert it
         Document post = new Document();
+        post.append("title", title);
+        post.append("body", body);
+        post.append("author", username);
+        post.append("permalink", permalink);
+        post.append("tags", tags);
+        post.append("comments", Arrays.asList());
+        post.append("date", new Date());
 
+        postsCollection.insertOne(post);
 
         return permalink;
     }
@@ -83,5 +99,21 @@ public class BlogPostDAO {
         // - email is optional and may come in NULL. Check for that.
         // - best solution uses an update command to the database and a suitable
         //   operator to append the comment on to any existing list of comments
+
+        Document comment = new Document();
+        comment.append("author", name);
+        comment.append("body", body);
+        comment.append("email", (email == null) ? " " : email);
+
+        Document post = findByPermalink(permalink);
+        ArrayList<Document> comments = (ArrayList<Document>) post.get("comments");
+        comments.add(comment);
+        post.append("comments", comments);
+
+        Bson filter = eq("_id", post.getObjectId("_id"));
+        Bson update =  new Document("$set", post);
+        UpdateOptions options = new UpdateOptions().upsert(true);
+
+        postsCollection.updateOne(filter, update, options);
     }
 }
