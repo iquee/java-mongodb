@@ -29,7 +29,6 @@ import spark.Route;
 import spark.Spark;
 
 import java.io.StringWriter;
-import java.net.UnknownHostException;
 
 public class HelloWorldMongoDBSparkFreemarkerStyle {
     public static void main(String[] args)  {
@@ -39,7 +38,7 @@ public class HelloWorldMongoDBSparkFreemarkerStyle {
 
         MongoClient client = new MongoClient(new ServerAddress("localhost", 27017));
 
-        MongoDatabase database = client.getDatabase("course");
+        MongoDatabase database = client.getDatabase("com/mongodb/m101j/course");
         final MongoCollection<Document> collection = database.getCollection("hello");
         collection.drop();
 

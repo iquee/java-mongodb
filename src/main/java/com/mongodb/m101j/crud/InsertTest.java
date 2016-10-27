@@ -27,7 +27,7 @@ import static java.util.Arrays.asList;
 public class InsertTest {
     public static void main(String[] args) {
         MongoClient client = new MongoClient();
-        MongoDatabase db = client.getDatabase("course");
+        MongoDatabase db = client.getDatabase("com/mongodb/m101j/course");
         MongoCollection<Document> coll = db.getCollection("insertTest");
 
         coll.drop();

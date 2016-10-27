@@ -16,12 +16,9 @@
 
 package com.mongodb.m101j.crud;
 
-import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.Filters;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 
@@ -35,7 +32,7 @@ import static com.mongodb.m101j.util.Helpers.printJson;
 public class FindWithFilterTest {
     public static void main(String[] args) {
         MongoClient client = new MongoClient();
-        MongoDatabase database = client.getDatabase("course");
+        MongoDatabase database = client.getDatabase("com/mongodb/m101j/course");
         MongoCollection<Document> collection = database.getCollection("findWithFilterTest");
 
         collection.drop();

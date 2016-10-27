@@ -19,23 +19,20 @@ package com.mongodb.m101j.crud;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.UpdateOptions;
 import org.bson.Document;
 
 import java.util.ArrayList;
 
-import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Filters.gte;
 import static com.mongodb.client.model.Updates.combine;
 import static com.mongodb.client.model.Updates.inc;
-import static com.mongodb.client.model.Updates.set;
 import static com.mongodb.m101j.util.Helpers.printJson;
 
 
 public class UpdateTest {
     public static void main(String[] args) {
         MongoClient client = new MongoClient();
-        MongoDatabase database = client.getDatabase("course");
+        MongoDatabase database = client.getDatabase("com/mongodb/m101j/course");
         MongoCollection<Document> collection = database.getCollection("test");
 
         collection.drop();
