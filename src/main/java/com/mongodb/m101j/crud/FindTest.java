@@ -16,10 +16,9 @@
 
 package com.mongodb.m101j.crud;
 
-import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
-import com.mongodb.client.MongoDatabase;
+import com.mongodb.m101j.util.MongoDBServer;
 import org.bson.Document;
 
 import java.util.ArrayList;
@@ -29,9 +28,7 @@ import static com.mongodb.m101j.util.Helpers.printJson;
 
 public class FindTest {
     public static void main(String[] args) {
-        MongoClient client = new MongoClient();
-        MongoDatabase database = client.getDatabase("com/mongodb/m101j/course");
-        MongoCollection<Document> collection = database.getCollection("findTest");
+        MongoCollection<Document> collection = MongoDBServer.getDB().getCollection("bancos");
 
         collection.drop();
 

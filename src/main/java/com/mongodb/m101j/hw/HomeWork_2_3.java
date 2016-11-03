@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.mongodb.m101j.crud;
+package com.mongodb.m101j.hw;
 
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.m101j.util.MongoDBServer;
 import org.bson.Document;
 
-public class DeleteTest {
+public class HomeWork_2_3 {
     public static void main(String[] args) {
         MongoCollection<Document> collection = MongoDBServer.getDB().getCollection("grades");
 
