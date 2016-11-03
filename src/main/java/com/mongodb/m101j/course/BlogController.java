@@ -54,7 +54,7 @@ public class BlogController {
 
     public static void main(String[] args) throws IOException {
         if (args.length == 0) {
-            new BlogController(MongoDBServer.host);
+            new BlogController(null);
         }
         else {
             new BlogController(args[0]);
@@ -62,7 +62,6 @@ public class BlogController {
     }
 
     public BlogController(String mongoURIString) throws IOException {
-        final MongoClient mongoClient = new MongoClient(new MongoClientURI(mongoURIString));
         final MongoDatabase blogDatabase = MongoDBServer.getDB(false, "blog");
 
         blogPostDAO = new BlogPostDAO(blogDatabase);
