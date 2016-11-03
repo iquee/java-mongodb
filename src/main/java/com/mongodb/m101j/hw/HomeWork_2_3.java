@@ -23,7 +23,7 @@ import org.bson.Document;
 
 public class HomeWork_2_3 {
     public static void main(String[] args) {
-        MongoCollection<Document> collection = MongoDBServer.getDB().getCollection("grades");
+        MongoCollection<Document> collection = MongoDBServer.getDB(false, "students").getCollection("grades");
 
         // collection.drop();
         FindIterable<Document> sort = collection.find(

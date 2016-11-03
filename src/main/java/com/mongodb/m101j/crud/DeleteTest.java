@@ -23,7 +23,7 @@ import org.bson.Document;
 
 public class DeleteTest {
     public static void main(String[] args) {
-        MongoCollection<Document> collection = MongoDBServer.getDB().getCollection("grades");
+        MongoCollection<Document> collection = MongoDBServer.getDB(false, "students").getCollection("grades");
 
         // collection.drop();
         FindIterable<Document> sort = collection.find(

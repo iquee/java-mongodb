@@ -28,7 +28,7 @@ import static com.mongodb.m101j.util.Helpers.printJson;
 
 public class FindTest {
     public static void main(String[] args) {
-        MongoCollection<Document> collection = MongoDBServer.getDB().getCollection("bancos");
+        MongoCollection<Document> collection = MongoDBServer.getDB(true, "taira").getCollection("bancos");
 
         collection.drop();
 

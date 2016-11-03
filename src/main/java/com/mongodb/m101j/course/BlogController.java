@@ -19,6 +19,7 @@ package com.mongodb.m101j.course;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.m101j.util.MongoDBServer;
 import freemarker.template.Configuration;
 import freemarker.template.SimpleHash;
 import freemarker.template.Template;
@@ -53,7 +54,7 @@ public class BlogController {
 
     public static void main(String[] args) throws IOException {
         if (args.length == 0) {
-            new BlogController("mongodb://localhost");
+            new BlogController(MongoDBServer.host);
         }
         else {
             new BlogController(args[0]);
@@ -62,7 +63,7 @@ public class BlogController {
 
     public BlogController(String mongoURIString) throws IOException {
         final MongoClient mongoClient = new MongoClient(new MongoClientURI(mongoURIString));
-        final MongoDatabase blogDatabase = mongoClient.getDatabase("blog");
+        final MongoDatabase blogDatabase = MongoDBServer.getDB(false, "blog");
 
         blogPostDAO = new BlogPostDAO(blogDatabase);
         userDAO = new UserDAO(blogDatabase);
